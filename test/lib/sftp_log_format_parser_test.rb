@@ -15,7 +15,7 @@ class TestSftpLogFormatParser < MiniTest::Unit::TestCase
     assert_equal "Oct 26 00:24:35", log_entry.time
     assert_equal "10772", log_entry.session_id
     assert_equal "session opened for local user dump from [10.0.2.2]", log_entry.info
-    assert_equal "open_session", log_entry.cmd
+    assert_equal Session::OPEN, log_entry.cmd
     assert_equal "dump", log_entry.account
     assert_nil log_entry.file
   end
@@ -27,7 +27,7 @@ class TestSftpLogFormatParser < MiniTest::Unit::TestCase
     assert_equal "Oct 26 00:24:35", log_entry.time
     assert_equal "10772", log_entry.session_id
     assert_equal "session closed for local user dump from [194.209.226.4]", log_entry.info
-    assert_equal "close_session", log_entry.cmd
+    assert_equal Session::CLOSE, log_entry.cmd
     assert_equal "dump", log_entry.account
     assert_nil log_entry.file
   end
@@ -39,7 +39,7 @@ class TestSftpLogFormatParser < MiniTest::Unit::TestCase
     assert_equal "Oct 26 00:24:35", log_entry.time
     assert_equal "10772", log_entry.session_id
     assert_equal 'close "/incoming/nzz_003.pdf" bytes read 0 written 304974', log_entry.info
-    assert_equal "file_written", log_entry.cmd
+    assert_equal Session::UPLOAD, log_entry.cmd
     assert_nil log_entry.account
     assert_equal "/incoming/nzz_003.pdf", log_entry.file
   end

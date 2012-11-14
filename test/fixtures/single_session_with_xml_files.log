@@ -1,0 +1,12 @@
+Nov  8 04:35:32 kai internal-sftp[17417]: session opened for local user kurier from [194.232.190.15]
+Nov  8 04:35:32 kai internal-sftp[17417]: received client version 3
+Nov  8 04:35:32 kai internal-sftp[17417]: open "/incoming/a_20121108_018.pdf" flags WRITE,CREATE,TRUNCATE mode 0100644
+Nov  8 04:35:33 kai internal-sftp[17417]: close "/incoming/a_20121108_018.pdf" bytes read 0 written 357532
+Nov  8 04:35:33 kai internal-sftp[17417]: open "/incoming/a_20121108_018.xml" flags WRITE,CREATE,TRUNCATE mode 0100644
+Nov  8 04:35:33 kai internal-sftp[17417]: close "/incoming/a_20121108_018.xml" bytes read 0 written 131
+Nov  8 04:35:33 kai internal-sftp[17417]: open "/incoming/a_20121108_019.pdf" flags WRITE,CREATE,TRUNCATE mode 0100644
+Nov  8 04:35:34 kai internal-sftp[17417]: close "/incoming/a_20121108_019.pdf" bytes read 0 written 390826
+Nov  8 04:35:34 kai internal-sftp[17417]: open "/incoming/a_20121108_019.xml" flags WRITE,CREATE,TRUNCATE mode 0100644
+Nov  8 04:35:34 kai internal-sftp[17417]: close "/incoming/a_20121108_019.xml" bytes read 0 written 131
+Nov  8 04:37:36 kai internal-sftp[17417]: session closed for local user kurier from [194.232.190.15]
+

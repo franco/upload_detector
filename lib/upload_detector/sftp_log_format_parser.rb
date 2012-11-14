@@ -4,11 +4,11 @@ class SftpLogFormatParser
     def cmd
       case info
       when SESSION_OPEN_CMD_REGEXP
-        'open_session'
+        Session::OPEN
       when SESSION_CLOSE_CMD_REGEXP
-        'close_session'
+        Session::CLOSE
       when SESSION_CLOSE_FILE_REGEXP
-        'file_written'
+        Session::UPLOAD
       end
     end
 

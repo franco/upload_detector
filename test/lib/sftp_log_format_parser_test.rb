@@ -44,6 +44,18 @@ class TestSftpLogFormatParser < MiniTest::Unit::TestCase
     assert_equal "/incoming/nzz_003.pdf", log_entry.file
   end
 
+  def test_parse_file_rename
+    stmt = 'Oct 26 00:24:35 kai internal-sftp[10772]: rename old "/incoming/TS_20121108_1.pdf.filepart" new "/incoming/TS_20121108_1.pdf"'
+    log_entry = @parser.parse stmt
+    assert_equal stmt, log_entry.log_stmt
+    assert_equal "Oct 26 00:24:35", log_entry.time
+    assert_equal "10772", log_entry.session_id
+    assert_equal 'rename old "/incoming/TS_20121108_1.pdf.filepart" new "/incoming/TS_20121108_1.pdf"', log_entry.info
+    assert_equal Session::RENAME, log_entry.cmd
+    assert_equal "/incoming/TS_20121108_1.pdf.filepart", log_entry.file
+    assert_equal "/incoming/TS_20121108_1.pdf", log_entry.renamed_to
+  end
+
   def test_parses_valid_statements
     [
       'Nov  8 00:35:19 kai internal-sftp[3183]: session opened for local user dump from [72.235.51.53]',

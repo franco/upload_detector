@@ -1,0 +1,34 @@
+Nov  8 03:00:21 kai internal-sftp[21356]: session opened for local user turunsanomat from [194.157.163.120]
+Nov  8 03:00:21 kai internal-sftp[21356]: received client version 5
+Nov  8 03:00:21 kai internal-sftp[21356]: realpath "."
+Nov  8 03:00:21 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_1.pdf"
+Nov  8 03:00:21 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:21 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_1.pdf.filepart"
+Nov  8 03:00:21 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:21 kai internal-sftp[21356]: open "/incoming/TS_20121108_1.pdf.filepart" flags WRITE,CREATE,TRUNCATE mode 0666
+Nov  8 03:00:25 kai internal-sftp[21356]: close "/incoming/TS_20121108_1.pdf.filepart" bytes read 0 written 737579
+Nov  8 03:00:25 kai internal-sftp[21356]: rename old "/incoming/TS_20121108_1.pdf.filepart" new "/incoming/TS_20121108_1.pdf"
+Nov  8 03:00:25 kai internal-sftp[21356]: set "/incoming/TS_20121108_1.pdf" modtime 20121108-01:01:32
+Nov  8 03:00:25 kai internal-sftp[21356]: open "/incoming/TS_20121108_10.pdf" flags WRITE,CREATE,TRUNCATE mode 0666
+Nov  8 03:00:26 kai internal-sftp[21356]: close "/incoming/TS_20121108_10.pdf" bytes read 0 written 101627
+Nov  8 03:00:26 kai internal-sftp[21356]: set "/incoming/TS_20121108_10.pdf" modtime 20121108-01:01:35
+Nov  8 03:00:26 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_11.pdf"
+Nov  8 03:00:26 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:26 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_11.pdf.filepart"
+Nov  8 03:00:26 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:26 kai internal-sftp[21356]: open "/incoming/TS_20121108_11.pdf.filepart" flags WRITE,CREATE,TRUNCATE mode 0666
+Nov  8 03:00:31 kai internal-sftp[21356]: close "/incoming/TS_20121108_11.pdf.filepart" bytes read 0 written 938125
+Nov  8 03:00:31 kai internal-sftp[21356]: rename old "/incoming/TS_20121108_11.pdf.filepart" new "/incoming/TS_20121108_11.pdf"
+Nov  8 03:00:31 kai internal-sftp[21356]: set "/incoming/TS_20121108_11.pdf" modtime 20121108-01:01:53
+Nov  8 03:00:31 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_12.pdf"
+Nov  8 03:00:31 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:31 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_12.pdf.filepart"
+Nov  8 03:00:31 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:31 kai internal-sftp[21356]: open "/incoming/TS_20121108_12.pdf.filepart" flags WRITE,CREATE,TRUNCATE mode 0666
+Nov  8 03:00:32 kai internal-sftp[21356]: close "/incoming/TS_20121108_12.pdf.filepart" bytes read 0 written 115946
+Nov  8 03:00:32 kai internal-sftp[21356]: rename old "/incoming/TS_20121108_12.pdf.filepart" new "/incoming/TS_20121108_12.pdf"
+Nov  8 03:00:32 kai internal-sftp[21356]: set "/incoming/TS_20121108_12.pdf" modtime 20121108-01:01:56
+Nov  8 03:00:32 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_13.pdf"
+Nov  8 03:00:32 kai internal-sftp[21356]: sent status No such file
+Nov  8 03:00:32 kai internal-sftp[21356]: lstat name "/incoming/TS_20121108_13.pdf.filepart"
+Nov  8 03:01:50 kai internal-sftp[21356]: session closed for local user turunsanomat from [194.157.163.120]

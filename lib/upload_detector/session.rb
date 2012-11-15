@@ -2,6 +2,7 @@ class Session
   OPEN = :open_session
   CLOSE = :close_session
   UPLOAD = :upload_file
+  RENAME = :rename_file
 
   attr_accessor :account, :session_id, :uploaded_files
 
@@ -11,7 +12,7 @@ class Session
 
   def process log_entry
     case log_entry.cmd
-    when OPEN, CLOSE, UPLOAD
+    when OPEN, CLOSE, UPLOAD, RENAME
       __send__ log_entry.cmd, log_entry
     end
   end
@@ -24,6 +25,10 @@ class Session
     closed? && @uploaded_files
   end
 
+  def uploaded_files
+    @uploaded_files ||= []
+  end
+
   private
 
   def open_session log_entry
@@ -31,7 +36,7 @@ class Session
   end
 
   def upload_file log_entry
-    (@uploaded_files ||= []) << log_entry.file
+    uploaded_files << log_entry.file
   end
 
   def close_session log_entry
@@ -39,6 +44,11 @@ class Session
     @closed = true
   end
 
+  def rename_file log_entry
+    if index = uploaded_files.index(log_entry.file)
+      uploaded_files[index] = log_entry.renamed_to
+    end
+  end
 end
 
 

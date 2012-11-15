@@ -7,8 +7,10 @@ class SftpLogFormatParser
         Session::OPEN
       when SESSION_CLOSE_CMD_REGEXP
         Session::CLOSE
-      when SESSION_CLOSE_FILE_REGEXP
+      when CLOSE_FILE_REGEXP
         Session::UPLOAD
+      when RENAME_FILE_REGEXP
+        Session::RENAME
       end
     end
 
@@ -17,7 +19,11 @@ class SftpLogFormatParser
     end
 
     def file
-      @file ||= FILE_REGEXP.match(info){ |m| m[1] }
+      @file ||= info.scan(FILE_REGEXP).flatten.first
+    end
+
+    def renamed_to
+      @renamed_to ||= info.scan(FILE_REGEXP).flatten.last
     end
   end
 
@@ -32,7 +38,8 @@ class SftpLogFormatParser
   FILE_REGEXP = /"([^"]+)"/
   SESSION_OPEN_CMD_REGEXP = /^session\sopened/
   SESSION_CLOSE_CMD_REGEXP = /^session\sclosed/
-  SESSION_CLOSE_FILE_REGEXP = /^\bclose\b.*read\s0/
+  CLOSE_FILE_REGEXP = /^\bclose\b.*read\s0/
+  RENAME_FILE_REGEXP = /^\brename\b/
 
   def parse string
     match = REGEX_LOG_ENTRY.match(string)

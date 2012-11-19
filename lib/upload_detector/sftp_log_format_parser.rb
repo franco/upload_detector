@@ -1,3 +1,5 @@
+require 'time'
+
 class SftpLogFormatParser
 
   LogEntry = Struct.new(:log_stmt, :time, :session_id, :info) do
@@ -25,6 +27,9 @@ class SftpLogFormatParser
     def renamed_to
       @renamed_to ||= info.scan(FILE_REGEXP).flatten.last
     end
+    def time
+      Time.parse self[:time]
+    end
   end
 
   TIME = '(?<time>\w{3}\s+\d{1,2}\s\d{2}:\d{2}:\d{2})'
@@ -41,23 +46,14 @@ class SftpLogFormatParser
   CLOSE_FILE_REGEXP = /^\bclose\b.*read\s0/
   RENAME_FILE_REGEXP = /^\brename\b/
 
-  def parse string
-    match = REGEX_LOG_ENTRY.match(string)
+  def parse_line string
+    match = REGEX_LOG_ENTRY.match(string) or raise ParserError::InvalidFormatError
 
-    # wrong format could indicated that openssh changed format of log statements?
-    if match.nil?
-      logger.debug{ "Log statement does not match expected format: '#{string}'" }
-      raise ParserError::InvalidFormatError.new 'Does not match the expected format:'
+    if match[:process] == 'internal-sftp'
+      LogEntry.new string, match[:time], match[:pid], match[:info]
+    else
+      nil
     end
-
-    # ignore non sftp entries (e.g. sshd)
-    unless match[:process] == 'internal-sftp'
-      logger.debug{ "Log statement ignored: '#{string}'" }
-      return nil
-    end
-
-    logger.debug{ "Log statement matched: #{match.inspect}" }
-
-    LogEntry.new string, match[:time], match[:pid], match[:info]
   end
+
 end

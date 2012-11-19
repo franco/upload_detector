@@ -4,7 +4,7 @@ class Session
   UPLOAD = :upload_file
   RENAME = :rename_file
 
-  attr_accessor :account, :session_id, :uploaded_files
+  attr_accessor :account, :session_id, :uploaded_files, :uploaded_at
 
   def initialize session_id, session_manager
     @session_id, @session_manager = session_id, session_manager
@@ -40,6 +40,7 @@ class Session
   end
 
   def close_session log_entry
+    self.uploaded_at = log_entry.time
     @session_manager.free_session session_id
     @closed = true
   end
@@ -52,63 +53,3 @@ class Session
 end
 
 
-#class SftpSession
-
-  #class ParseError < StandardError; end
-
-  #attr_accessor :account, :session_id, :uploaded_files
-
-  #class <<self
-    #def get session_id
-      #(@sessions ||= {} )[session_id] ||= self.new session_id
-    #end
-    #alias_method :[], :get
-
-    #def remove session
-      #@sessions.delete session.session_id
-    #end
-  #end
-
-  #def initializer session_id
-    #@session_id = session_id
-  #end
-
-  #def process_log_statement stmt
-    #case stmt
-    #when /^session\sopened/
-      #self.account = extract_account stmt
-    #when /^session\sclosed/
-      #@closed = true
-      #self.class.remove self
-    #when /^\bclose\b.*read\s0/
-      #(@uploaded_files ||= []) << extract_file(stmt)
-    #else
-      ## ignore event
-    #end
-
-    #self
-  #end
-
-  #def closed?
-    #@closed ||= false
-  #end
-
-  #def has_uploaded_files?
-    #closed? && @uploaded_files
-  #end
-
-  #private
-
-  #def extract_account stmt
-    #/for\slocal\suser\s([-|\w]+)\sfrom/.match(stmt) do |m|
-      #m[1]
-    #end or raise ParseError.new 'Could not parse account name'
-  #end
-
-  #def extract_file stmt
-    #/\"([-|\w]+)\"/.match(stmt) do |m|
-      #m[1]
-    #end or raise ParseError.new 'Could not parse file name'
-  #end
-
-#end

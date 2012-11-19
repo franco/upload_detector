@@ -1,14 +1,14 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..' )
 require  'test_helper.rb'
 
-LogEntryDouble = Struct.new :session_id, :cmd, :account, :file, :renamed_to
+LogEntryDouble = Struct.new :session_id, :cmd, :account, :file, :renamed_to, :time
 
 describe Session do
   before do
     @session_manager = MiniTest::Mock.new
     @session_manager.expect :free_session, nil, ['1']
     @session = Session.new '1', @session_manager
-    @log_entry = LogEntryDouble.new '1', Session::OPEN, 'dump', '/path/to/file'
+    @log_entry = LogEntryDouble.new '1', Session::OPEN, 'dump', '/path/to/file', nil, '<TIME>'
   end
 
   describe "open session" do
@@ -55,6 +55,11 @@ describe Session do
     it "signals the session manager object to free the object" do
       @session.process @log_entry
       @session_manager.verify
+    end
+
+    it "sets the uploaded_at time" do
+      @session.process @log_entry
+      @session.uploaded_at.must_equal '<TIME>'
     end
   end
 

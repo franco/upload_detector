@@ -17,6 +17,12 @@ gem 'trollop'
 
 gem 'rake'
 
+#group :development do
+  #gem 'rvm-capistrano'
+  #gem 'debugger'
+#end
+
+
 group :test do
   gem 'minitest'
   gem 'ruby-prof'

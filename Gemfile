@@ -17,10 +17,10 @@ gem 'trollop'
 
 gem 'rake'
 
-#group :development do
-  #gem 'rvm-capistrano'
+group :development do
+  gem 'rvm-capistrano'
   #gem 'debugger'
-#end
+end
 
 
 group :test do

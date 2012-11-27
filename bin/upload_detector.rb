@@ -21,6 +21,7 @@ Usage:
 where [options] are:
 EOS
   opt :annotate, "Dry runs the parser and outputs the logfile with parser annotation. Does not trigger any imports. "
+  opt :deamon, "Runs the parser as deamon. "
   opt :debug, "Dry runs the parser and outputs the uploaded files. Does not trigger any imports. "
 end
 
@@ -36,8 +37,10 @@ detector = Detector.new log_file: log_file
 detector.add_listener AnnotationListener.new if opts[:annotate]
 detector.add_listener UploadListener.new unless opts[:annotate] || opts[:debug]
 detector.add_listener DebugUploadListener.new if opts[:debug]
+#detector.add_listener ImportTrigger.new
+
 #processor.add_listener LogListener.new
 
-forever = false if opts[:annotate] || opts[:debug] or true
+forever = opts[:deamon]
 UploadDetector.new( :detector => detector, :logger => logger ).run(forever)
 

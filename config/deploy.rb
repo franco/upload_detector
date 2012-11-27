@@ -1,8 +1,19 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 
+if ENV['DEPLOY'] == 'PRODUCTION'
+  set :branch, "master"
+  set :user, "manager_staging"
+  set :user, "import"
+  role :app, "kai.shortcutmedia.com"
+else
+  puts "*** No default deploy target!"
+  #set :port, 2222
+  #role :app, "localhost"
+  exit
+end
+
 set :application, "upload_detector"
-set :user, "import"
 
 # default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -18,7 +29,7 @@ set :branch, "master"
 
 
 # install and use rvm
-set :rvm_ruby_string, 'ruby-1.9.3-p194'
+set :rvm_ruby_string, 'ruby-1.9.3-p327'
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset
 
@@ -26,9 +37,6 @@ before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset
 # bundler setup
 #
 set :bundle_without, [:development, :test ]
-
-set :port, 2222
-role :app, "localhost"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"

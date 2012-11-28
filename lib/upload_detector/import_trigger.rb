@@ -1,6 +1,6 @@
 UploadReference = Struct.new(:account, :uploaded_at) do
   def id
-    "#{account}-#{upoaded_at.to_i}"
+    "#{account}-#{uploaded_at.to_i}"
   end
 end
 

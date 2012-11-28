@@ -1,0 +1,18 @@
+defaults: &defaults
+  nothing_yet: null
+
+development:
+  <<: *defaults
+  deamonized: false
+  log_file: "../tmp/sftp_simple.log"
+
+test:
+  <<: *defaults
+  deamonized: false
+  log_file: null
+
+production:
+  <<: *defaults
+  deamonized: true
+  log_file: "/var/log/sftp.log"
+

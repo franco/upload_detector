@@ -7,7 +7,7 @@ end
 # TODO: make it run in parallel later with celluloid
 class ImportTrigger
   # state: new, processing, imported
-  def initialize args
+  def initialize args={}
     @import_store = args[:store] || ImportStore.new
   end
 

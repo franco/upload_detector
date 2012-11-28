@@ -10,7 +10,7 @@ class ImportStore
     end
   end
 
-  def initialize args
+  def initialize args={}
     @location = args[:location] || 'imports.pstore'
   end
 

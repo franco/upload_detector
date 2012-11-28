@@ -10,7 +10,7 @@ class ImportRunner
 
   attr_accessor :state, :error, :result
 
-  def initialize args
+  def initialize args={}
     @timeout    = args[:timeout] || 10*60 # defaults to 10 minutes
     @shell      = args[:shell] || Shell.new
     @run_script = args[:run_script] || '/srv/backend/current/script/import_runner.sh'

@@ -18,7 +18,7 @@ class ImportRunner
   end
 
   def self.test_run files=nil
-    files ||= ["/Users/franco/Contempt/turuns/TS_20121120_1.pdf"]
+    files ||= ["/srv/sftp/20minuten/incoming/20MIN_ZH_20121121_038.pdf"]
     import = Import.new(files: files)
     import_config = AppConfig.new filename: 'import_trigger.yml', env: env
     ImportRunner.new(import_config).run(import)

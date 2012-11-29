@@ -1,8 +1,8 @@
 defaults: &defaults
-  log_file: log/upload_detector.log
   annotate: false
   debug:    false
   log:      false
+  log_file: log/upload_detector.log
 
 development:
   <<: *defaults
@@ -14,7 +14,6 @@ test:
   deamonized: false
   input_file: null
   log_file: null
-
 
 production:
   <<: *defaults

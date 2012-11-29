@@ -13,14 +13,15 @@ class ImportRunner
   def initialize args={}
     @timeout    = args[:timeout] || 10*60 # defaults to 10 minutes
     @shell      = args[:shell] || Shell.new
-    @run_script = args[:run_script] || '/srv/backend/current/script/import_runner.sh'
+    @run_script = args[:run_script]
     @state      = :init
   end
 
-  def self.debug_run
-    files = ["/Users/franco/Contempt/turuns/TS_20121120_1.pdf"]
+  def self.test_run files=nil
+    files ||= ["/Users/franco/Contempt/turuns/TS_20121120_1.pdf"]
     import = Import.new(files: files)
-    ImportRunner.new(run_script: '/Users/franco/Work/kooaba/backend/script/local_file_import_runner.sh').run(import)
+    import_config = AppConfig.new filename: 'import_trigger.yml', env: env
+    ImportRunner.new(import_config).run(import)
   end
 
   def run import

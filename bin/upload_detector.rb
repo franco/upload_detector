@@ -20,7 +20,9 @@ detector = Detector.new input_file: input_file
 #detector.add_listener AnnotationListener.new if opts[:annotate]
 #detector.add_listener UploadListener.new unless opts[:annotate] || opts[:debug]
 detector.add_listener DebugUploadListener.new if opts[:debug]
-detector.add_listener ImportTrigger.new
+
+import_config = AppConfig.new filename: 'import_trigger.yml', env: env
+detector.add_listener ImportTrigger.new(import_config)
 
 if config.log
   #log_level = opts[:debug] ? Log4r::DEBUG : Log4r::INFO

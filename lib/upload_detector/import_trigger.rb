@@ -6,15 +6,17 @@ end
 
 # TODO: make it run in parallel later with celluloid
 class ImportTrigger
+  attr_reader :import_store, :import_runner
   def initialize args={}
-    @import_store = args[:store] || ImportStore.new
+    @import_store  = args[:store] || ImportStore.new(location: args[:pstore_file])
+    @import_runner = args[:import_runner] || ImportRunner.new(args)
   end
 
   def trigger_import
-    import = @import_store.find_or_create_import( import_attrs )
+    import = import_store.find_or_create_import( import_attrs )
 
     unless import.run?
-      ImportRunner.new.run(import)
+      import_runner.run import
 
       if import.success?
         import.save

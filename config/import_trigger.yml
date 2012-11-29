@@ -1,0 +1,15 @@
+defaults: &defaults
+  empty: 'yet'
+
+development:
+  <<: *defaults
+  run_script: '/Users/franco/Work/kooaba/backend/script/local_file_import_runner.sh'
+  pstore_file: '/Users/franco/Work/shortcut_media/apps/upload_detector/tmp/import.pstore'
+test:
+  <<: *defaults
+  run_script: null
+  pstore_file: '/Users/franco/Work/shortcut_media/apps/upload_detector/tmp/import.pstore'
+production:
+  <<: *defaults
+  run_script: '/srv/backend/current/script/import_runner.sh'
+  pstore_file: '/srv/import/import.pstore'

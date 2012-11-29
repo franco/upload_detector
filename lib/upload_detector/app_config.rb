@@ -23,4 +23,8 @@ class AppConfig
       EOS
     end
   end
+
+  def [](key)
+    data[key.to_s]
+  end
 end

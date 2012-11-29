@@ -1,6 +1,10 @@
 # copied from ruby tapas episode 017
 
-CommandResult = Struct.new :status, :output
+CommandResult = Struct.new :status, :output do
+  def success?
+    status.success?
+  end
+end
 
 class Shell
   def execute command, flags=[], input=nil

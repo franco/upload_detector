@@ -35,8 +35,8 @@ class ImportRunner
       self.result = shell.execute "#{run_script}", import.files
     end
 
-    if result.status.success?
-      import.run_at Time.now
+    if result.success?
+      import.run_at = Time.now
       self.state = :imported
     end
 
@@ -44,10 +44,10 @@ class ImportRunner
     self.state = :error
     self.error = :timeout
     import.error = error
-  rescue Exception => e
-    self.state = :error
-    self.error = e.message
-    import.error = e.message
+  #rescue Exception => e
+    #self.state = :error
+    #self.error = e.message
+    #import.error = e.message
   ensure
     self
   end

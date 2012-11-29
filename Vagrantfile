@@ -51,6 +51,8 @@ Vagrant::Config.run do |config|
     chef.add_role "ubuntu"
     chef.add_recipe "timezone"
     chef.add_recipe "dev_suite"
+    chef.add_recipe "sftp"
+    chef.add_recipe "sftp::users"
     chef.json = {
       'users'=> [ 'import' ],
       "timezone" => {

@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
+
+#load environment
+env = ENV['UPLOAD_DETECTOR_ENV'] || 'development'
 require "rubygems"
 require "bundler"
-env = ENV['UPLOAD_DETECTOR_ENV'] || 'development'
 Bundler.setup(:default, env)
-require 'trollop'
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'upload_detector'
@@ -12,20 +13,22 @@ opts   = CommandlineOptions.new
 config = AppConfig.new filename: 'upload_detector.yml', env: env, initial_data: opts.opts
 
 
-log_file = File.open config.log_file
-detector = Detector.new log_file: log_file
+
+input_file = File.open config.input_file
+detector = Detector.new input_file: input_file
+
 #detector.add_listener AnnotationListener.new if opts[:annotate]
 #detector.add_listener UploadListener.new unless opts[:annotate] || opts[:debug]
 detector.add_listener DebugUploadListener.new if opts[:debug]
 detector.add_listener ImportTrigger.new
 
-if opts[:log]
+if config.log
   #log_level = opts[:debug] ? Log4r::DEBUG : Log4r::INFO
-  log_path = File.join(File.dirname(__FILE__), '..', 'log/import.log')
-  @logger = Logger.new(:filename => log_path)
-  detector.add_listener @logger
+  log_path = File.expand_path(config.log_file, UploadDetector.root)
+  logger = Logger.new(:filename => log_path)
+  detector.add_listener logger
 end
 
 forever = opts[:deamonized]
-UploadDetector.new( :detector => detector, :logger => logger ).run(forever)
+UploadDetector.new( :detector => detector, :logger => nil ).run(forever)
 

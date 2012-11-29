@@ -1,3 +1,5 @@
+require 'trollop'
+
 class CommandlineOptions
   attr_reader :opts, :log_file
 

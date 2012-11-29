@@ -1,18 +1,23 @@
 defaults: &defaults
-  nothing_yet: null
+  log_file: log/upload_detector.log
+  annotate: false
+  debug:    false
+  log:      false
 
 development:
   <<: *defaults
   deamonized: false
-  log_file: "../tmp/sftp_simple.log"
+  input_file: "tmp/sftp_simple.log"
 
 test:
   <<: *defaults
   deamonized: false
+  input_file: null
   log_file: null
+
 
 production:
   <<: *defaults
   deamonized: true
-  log_file: "/var/log/sftp.log"
-
+  #input_file: "/var/log/sftp.log"
+  input_file: "tmp/sftp.log"

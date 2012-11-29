@@ -12,11 +12,11 @@ end
 
 describe "parsing a single session" do
   it "works" do
-    log_file = Fixture.load 'single_session_with_xml_files.log'
+    input_file = Fixture.load 'single_session_with_xml_files.log'
 
     upload_listener = UploadListenerDouble.new
 
-    detector = Detector.new log_file: log_file, log_format: 'sftp'
+    detector = Detector.new input_file: input_file, log_format: 'sftp'
     detector.add_listener upload_listener
     UploadDetector.new( :detector => detector ).run(false)
 
@@ -30,11 +30,11 @@ end
 
 describe "parsing a single session with some files renamed" do
   it "works" do
-    log_file = Fixture.load 'single_session_with_renaming_files.log'
+    input_file = Fixture.load 'single_session_with_renaming_files.log'
 
     upload_listener = UploadListenerDouble.new
 
-    detector = Detector.new log_file: log_file, log_format: 'sftp'
+    detector = Detector.new input_file: input_file, log_format: 'sftp'
     detector.add_listener upload_listener
     UploadDetector.new( :detector => detector ).run(false)
 

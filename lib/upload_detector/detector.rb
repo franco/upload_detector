@@ -8,7 +8,7 @@ class Detector
 
   def initialize args
     @session_manager = args[:session_manager] || SessionManager.new(builder: Session) # TODO shouldn't we pass a factory instead of a class name?
-    @log_parser = args[:log_parser] || LogParser.new(log_io: args[:log_file])
+    @log_parser = args[:log_parser] || LogParser.new(log_io: args[:input_file])
     @log_parser.add_listener self
   end
 

@@ -20,6 +20,10 @@ end
 class UploadDetector
   attr_reader :detector, :logger
 
+  def self.root
+    File.expand_path('..',File.dirname(__FILE__))
+  end
+
   def initialize(args)
     @detector = args[:detector]
     @logger = args[:logger] || Log4r::Logger.root # defaults to Null Logger

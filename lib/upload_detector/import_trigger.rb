@@ -6,10 +6,11 @@ end
 
 # TODO: make it run in parallel later with celluloid
 class ImportTrigger
-  attr_reader :import_store, :import_runner
+  attr_reader :import_store, :import_runner, :root_import_path
   def initialize args={}
     @import_store  = args[:store] || ImportStore.new(location: args[:pstore_file])
     @import_runner = args[:import_runner] || ImportRunner.new(args)
+    @root_import_path = args[:root_import_path]
   end
 
   def trigger_import
@@ -40,19 +41,12 @@ class ImportTrigger
   end
 
   def import_attrs
-    { :upload_reference => upload_reference, :files => @uploaded_files }
+    { :upload_reference => upload_reference, :files => absolute_path_uploaded_files }
   end
 
-  #def find_or_create_import
-    #if import_data = @store[upload_reference]
-      #import = Import.new import_data
-    #else
-      #import = Import.new(upload_reference: upload_reference, files: @uploaded_files)
-      #@store[upload_reference] = import.to_params
-    #end
-    #import
-  #end
-
+  def absolute_path_uploaded_files
+    @uploaded_files.map{ |file| File.join root_import_path, @account, file }
+  end
 end
 
 

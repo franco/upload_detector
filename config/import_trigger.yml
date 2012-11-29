@@ -5,11 +5,14 @@ development:
   <<: *defaults
   run_script: '/Users/franco/Work/kooaba/backend/script/local_file_import_runner.sh'
   pstore_file: '/Users/franco/Work/shortcut_media/apps/upload_detector/tmp/import.pstore'
+  root_import_path: '/srv/sftp'
 test:
   <<: *defaults
   run_script: null
   pstore_file: '/Users/franco/Work/shortcut_media/apps/upload_detector/tmp/import.pstore'
+  root_import_path: '/srv/sftp'
 production:
   <<: *defaults
   run_script: 'sudo -u backend -H -i /srv/backend/current/script/local_file_import_runner.sh'
   pstore_file: '/srv/import/import.pstore'
+  root_import_path: '/srv/sftp'

@@ -17,6 +17,8 @@ gem 'trollop'
 
 gem 'rake'
 
+gem 'debugger'
+
 group :development do
   gem 'rvm-capistrano'
   #gem 'debugger'

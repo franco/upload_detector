@@ -14,7 +14,7 @@ config = AppConfig.new filename: 'upload_detector.yml', env: env, initial_data: 
 
 
 
-input_file = File.open config.input_file
+input_file = File.open File.expand_path(config.input_file, UploadDetector.root)
 detector = Detector.new input_file: input_file
 
 #detector.add_listener AnnotationListener.new if opts[:annotate]

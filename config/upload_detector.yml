@@ -18,5 +18,5 @@ test:
 production:
   <<: *defaults
   deamonized: true
-  #input_file: "/var/log/sftp.log"
-  input_file: "tmp/sftp.log"
+  input_file: "/var/log/sftp.log"
+  #input_file: "tmp/sftp.log"

@@ -31,6 +31,6 @@ if config.log
   detector.add_listener logger
 end
 
-forever = opts[:deamonized]
+forever = config.deamonized
 UploadDetector.new( :detector => detector, :logger => nil ).run(forever)
 

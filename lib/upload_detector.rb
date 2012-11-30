@@ -34,6 +34,7 @@ class UploadDetector
     while run
       detector.detect
       run = forever
+      sleep 20 if forever
     end
   end
 end

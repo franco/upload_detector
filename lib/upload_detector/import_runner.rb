@@ -26,7 +26,8 @@ class ImportRunner
   end
 
   def run import
-    raise RuntimeError "Can not run twice." if state != :init
+    self.state = :init
+    #raise RuntimeError "Can not run twice." if state != :init
     return self if import.run?
 
     self.state  = :run

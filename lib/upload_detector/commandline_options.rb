@@ -1,29 +1,57 @@
-require 'trollop'
+require 'optparse'
 
 class CommandlineOptions
-  attr_reader :opts, :log_file
+  attr_reader :opts, :input_files
 
   def initialize
     parse
   end
 
   def parse
-    @opts = Trollop::options do
-      version "upload_detector 0.1.0 (c) 2012 Shortcut Media AG"
-      banner <<-EOS
-    Checks if new pdfs files got uploaded and are ready to import.
 
-    Usage:
-           upload_detector [options] <filename>+
-    where [options] are:
-    EOS
-      opt :annotate, "Dry runs the parser and outputs the logfile with parser annotation. Does not trigger any imports. "
-      opt :deamonized, "Runs the parser as deamon. "
-      opt :debug, "Dry runs the parser and outputs the uploaded files. Does not trigger any imports. "
-      opt :log, "Log to a logfile."
-    end
+    @opts = options = {}
+    OptionParser.new do |opts|
+      opts.banner = "Usage: (UPLOAD_DETECTOR_ENV=<ENV>) upload_detector [options] (<filename>+)"
+      opts.version = "0.1.0 (c) 2012 Shortcut Media AG"
 
-    @log_file = ARGV.shift
+      opts.on("-a", "--[no-]annotate", "Run with internal parser annotations") do |a|
+        options[:annotate] = a
+      end
+
+      opts.on("-d", "--[no-]deamonized", "Run as deamon") do |d|
+        options[:verbose] = d
+      end
+
+      opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+        options[:debug] = v
+      end
+
+      opts.on("-l", "--log [logfile]", "Enable logging") do |log|
+        if log
+          options[:logfile] = log
+        else
+          puts "You must provide a logfile. See help for more information."
+          exit
+        end
+      end
+
+      opts.on("-i", "--input[logfile]", "Input file to parse") do |input|
+        if input
+          options[:input_file] = input
+        else
+          puts "You must provide a file. See help for more information."
+          exit
+        end
+      end
+
+      opts.on_tail("-h", "--help", "Show this message") do
+        puts opts
+        exit
+      end
+    end.parse!
+
+    #@log_file = ARGV.shift
+
     self
   end
 
@@ -31,7 +59,4 @@ class CommandlineOptions
     opts[key]
   end
 
-  def opts
-    @opts.merge log_file: log_file
-  end
 end

@@ -45,7 +45,6 @@ GEM
       capistrano (>= 2.0.0)
     state_machine (1.1.2)
     timers (1.0.1)
-    trollop (2.0)
 
 PLATFORMS
   ruby
@@ -61,4 +60,3 @@ DEPENDENCIES
   ruby-prof
   rvm-capistrano
   state_machine
-  trollop

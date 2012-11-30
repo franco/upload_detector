@@ -13,8 +13,6 @@ gem 'log4r'
 
 gem 'active_support', :require => 'active_support/core_ext/string/inflections'
 
-gem 'trollop'
-
 gem 'rake'
 
 gem 'debugger'

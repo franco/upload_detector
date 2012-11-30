@@ -1,4 +1,6 @@
 require 'yaml'
+require 'active_support/core_ext/hash/keys'
+
 class AppConfig
   attr_reader :data, :env
   def self.config_path
@@ -6,12 +8,22 @@ class AppConfig
   end
 
   def initialize opts
-    @env = opts[:env] || 'development'
-    filename = opts[:filename]
-    yml = YAML::load_file(File.join(self.class.config_path, filename))
+    @env  = opts[:env] || 'development'
+    @data = load_data opts[:filename]
     initial_data = opts[:initial_data] || {}
-    @data = yml[env].merge(initial_data)
+    data.merge!(initial_data.stringify_keys)
     define_methods_for_environment(data.keys)
+  end
+
+  def [](key)
+    data[key.to_s]
+  end
+
+  private
+
+  def load_data filename, env=@env
+    yml = YAML::load_file(File.join(self.class.config_path, filename))
+    yml[env]
   end
 
   def define_methods_for_environment names
@@ -22,9 +34,5 @@ class AppConfig
         end
       EOS
     end
-  end
-
-  def [](key)
-    data[key.to_s]
   end
 end

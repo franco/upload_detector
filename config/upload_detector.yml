@@ -1,8 +1,7 @@
 defaults: &defaults
   annotate: false
   debug:    false
-  log:      false
-  log_file: log/upload_detector.log
+  logfile: "log/upload_detector.log"
 
 development:
   <<: *defaults

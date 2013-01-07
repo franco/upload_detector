@@ -12,7 +12,15 @@ require 'upload_detector'
 opts   = CommandlineOptions.new
 config = AppConfig.new filename: 'upload_detector.yml', env: env, initial_data: opts.opts
 
+# Daemonize process if needed
+if config.daemonize
+  daemons_options = { ontop: true, app_name: 'upload_detector' }
+  Daemons.daemonize daemons_options
+end
+
+
 input_file = File.open File.expand_path(config.input_file, UploadDetector.root)
+#input_file = File.expand_path(config.input_file, UploadDetector.root)
 detector = Detector.new input_file: input_file
 
 #detector.add_listener AnnotationListener.new if opts[:annotate]

@@ -53,7 +53,7 @@ class UploadDetector
   private
 
   def run_daemonized
-    Daemons.daemonize daemons_options
+    #Daemons.daemonize daemons_options
   end
 
   def daemons_options

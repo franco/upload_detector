@@ -5,17 +5,17 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  deamonized: false
+  daemonize: false
   input_file: "tmp/sftp_simple.log"
 
 test:
   <<: *defaults
-  deamonized: false
+  daemonize: false
   input_file: null
   log_file: null
 
 production:
   <<: *defaults
-  deamonized: true
+  daemonize: true
   input_file: "/var/log/sftp.log"
   #input_file: "tmp/sftp.log"

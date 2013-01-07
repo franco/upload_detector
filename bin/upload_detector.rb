@@ -26,9 +26,10 @@ if config.logfile
   detector.add_listener logger
 end
 
-import_config = AppConfig.new filename: 'import_trigger.yml', env: env
-detector.add_listener ImportTrigger.new(import_config)
+unless opts[:no_import]
+  import_config = AppConfig.new filename: 'import_trigger.yml', env: env
+  detector.add_listener ImportTrigger.new(import_config)
+end
 
-forever = config.deamonized
-UploadDetector.new( :detector => detector, :logger => nil ).run(forever)
+UploadDetector.new( logger: nil, daemonized: config.daemonize ).run( detector )
 

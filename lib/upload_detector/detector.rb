@@ -25,6 +25,10 @@ class Detector
     end
   end
 
+  def reload
+    log_parser.reload
+  end
+
   private
 
   def apply_entry_to_session log_entry

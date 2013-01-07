@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 
-if ENV['DEPLOY'] == 'PRODUCTION'
+if ENV['DEPLOY'] == 'production'
   set :branch, "master"
   set :user, "manager_staging"
   set :user, "import"

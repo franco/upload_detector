@@ -18,8 +18,8 @@ class CommandlineOptions
         options[:annotate] = a
       end
 
-      opts.on("-d", "--[no-]deamonized", "Run as deamon") do |d|
-        options[:verbose] = d
+      opts.on("-d", "--[no-]daemonize", "Run as daemon") do |d|
+        options[:daemonize] = d
       end
 
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
@@ -42,6 +42,10 @@ class CommandlineOptions
           puts "You must provide a file. See help for more information."
           exit
         end
+      end
+
+      opts.on("--no-import", "Do not trigger an import") do |no_import|
+        options[:no_import] = true
       end
 
       opts.on_tail("-h", "--help", "Show this message") do

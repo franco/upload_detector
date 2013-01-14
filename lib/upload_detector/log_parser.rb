@@ -11,6 +11,7 @@ class LogParser
   end
 
   def reload
+    debugger
     log_io.reopen log_io.path
   end
 

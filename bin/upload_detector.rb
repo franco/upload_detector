@@ -13,8 +13,11 @@ opts   = CommandlineOptions.new
 config = AppConfig.new filename: 'upload_detector.yml', env: env, initial_data: opts.opts
 
 # Daemonize process if needed
+#
+# This will change the current directory[1].
+# [1] http://stackoverflow.com/questions/11237815/ruby-cant-write-to-logs-in-daemons
 if config.daemonize
-  daemons_options = { ontop: true, app_name: 'upload_detector' }
+  daemons_options = { ontop: true, app_name: 'upload_detector', dir_mode: :normal, dir: config.pidfile }
   Daemons.daemonize daemons_options
 end
 

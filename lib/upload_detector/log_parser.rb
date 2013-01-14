@@ -10,6 +10,10 @@ class LogParser
     @log_entry_parser  = args[:log_entry_parser] || log_entry_parser
   end
 
+  def reload
+    log_io.reopen log_io.path
+  end
+
   def each
     log_io.each do |line|
       @line = line

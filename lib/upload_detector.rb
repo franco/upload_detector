@@ -68,6 +68,7 @@ class UploadDetector
   def setup_usr1_trap
     @reload = false
     trap("USR1") do
+      debugger
       @reload = true
     end
   end

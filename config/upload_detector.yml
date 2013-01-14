@@ -2,6 +2,7 @@ defaults: &defaults
   annotate: false
   debug:    false
   logfile: "log/upload_detector.log"
+  pidfile: "."
 
 development:
   <<: *defaults
@@ -17,5 +18,6 @@ test:
 production:
   <<: *defaults
   daemonize: true
+  pidfile: "/tmp"
   input_file: "/var/log/sftp.log"
   #input_file: "tmp/sftp.log"

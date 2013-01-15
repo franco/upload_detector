@@ -24,7 +24,8 @@ if config.daemonize
 end
 
 
-input_file = File.open File.expand_path(config.input_file, UploadDetector.root)
+#input_file = File.open File.expand_path(config.input_file, UploadDetector.root)
+input_file = LogFile.new File.expand_path(config.input_file, UploadDetector.root)
 #input_file = File.expand_path(config.input_file, UploadDetector.root)
 detector = Detector.new input_file: input_file
 

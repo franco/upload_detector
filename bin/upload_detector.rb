@@ -6,7 +6,6 @@ require "rubygems"
 require "bundler"
 Bundler.setup(:default, env)
 
-require 'debugger'
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'upload_detector'
@@ -19,7 +18,7 @@ config = AppConfig.new filename: 'upload_detector.yml', env: env, initial_data: 
 # This will change the current directory[1].
 # [1] http://stackoverflow.com/questions/11237815/ruby-cant-write-to-logs-in-daemons
 if config.daemonize
-  daemons_options = { ontop: true, app_name: 'upload_detector', dir_mode: :script, dir: config.pidfile }
+  daemons_options = { ontop: true, app_name: 'upload_detector', dir_mode: :normal, dir: config.pidfile }
   Daemons.daemonize daemons_options
 end
 

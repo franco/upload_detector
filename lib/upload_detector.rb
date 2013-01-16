@@ -40,9 +40,10 @@ class UploadDetector
 
       if daemonized
         if @reload
+          @reload = false
           detector.reload
         else
-          sleep 30
+          sleep 5
         end
       else
         @run = false
@@ -68,7 +69,7 @@ class UploadDetector
   def setup_usr1_trap
     @reload = false
     trap("USR1") do
-      debugger
+      puts "trigger reload..."
       @reload = true
     end
   end

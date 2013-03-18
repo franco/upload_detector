@@ -8,8 +8,6 @@ gem 'state_machine', :require => 'state_machine/core'
 gem 'celluloid'
 gem 'daemons'
 
-gem 'rspec'
-
 gem 'log4r'
 
 gem 'active_support', :require => 'active_support/core_ext/string/inflections'

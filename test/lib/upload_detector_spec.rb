@@ -18,7 +18,7 @@ describe "parsing a single session" do
 
     detector = Detector.new input_file: input_file, log_format: 'sftp'
     detector.add_listener upload_listener
-    UploadDetector.new( :detector => detector ).run(false)
+    UploadDetector.new( daemonized: false ).run(detector)
 
     upload_listener.uploaded_files.must_equal [
      "/incoming/a_20121108_018.pdf", "/incoming/a_20121108_018.xml",
@@ -36,7 +36,7 @@ describe "parsing a single session with some files renamed" do
 
     detector = Detector.new input_file: input_file, log_format: 'sftp'
     detector.add_listener upload_listener
-    UploadDetector.new( :detector => detector ).run(false)
+    UploadDetector.new( daemonized: false ).run(detector)
 
     upload_listener.uploaded_files.must_equal [
       "/incoming/TS_20121108_1.pdf", "/incoming/TS_20121108_10.pdf",

@@ -1,6 +1,14 @@
-UploadReference = Struct.new(:account, :uploaded_at) do
+require 'digest/sha1'
+
+UploadReference = Struct.new(:account, :uploaded_at, :files) do
   def id
-    "#{account}-#{uploaded_at.to_i}"
+    "#{account}-#{uploaded_at.to_i}-#{short_file_digest}"
+  end
+  def short_file_digest
+    file_digest[0,8]
+  end
+  def file_digest
+    Digest::SHA1.hexdigest files.join
   end
 end
 
@@ -37,7 +45,7 @@ class ImportTrigger
 
 
   def upload_reference
-    UploadReference.new(@account, @uploaded_at).id
+    UploadReference.new(@account, @uploaded_at, @uploaded_files).id
   end
 
   def import_attrs

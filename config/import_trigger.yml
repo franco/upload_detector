@@ -1,5 +1,6 @@
 defaults: &defaults
   empty: 'yet'
+  runner: 'ImportRunner'
 
 development:
   <<: *defaults
@@ -16,3 +17,12 @@ production:
   run_script: 'sudo -u backend -H -i /srv/backend/current/script/local_file_import_runner.sh'
   pstore_file: '/srv/import/import.pstore'
   root_import_path: '/srv/sftp'
+
+tonga:
+  <<: *defaults
+  runner: 'TongaImportRunner'
+  run_script: 'sudo -u tonga -H -i /srv/tonga/current/script/local_file_import_runner.sh'
+  pstore_file: '/srv/import/tonga_import.pstore'
+  root_import_path: '/srv/sftp'
+
+

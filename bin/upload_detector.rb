@@ -41,7 +41,7 @@ end
 
 unless opts[:no_import]
   import_config = AppConfig.new filename: 'import_trigger.yml', env: env
-  runner = opts[:tonga] ? TongaImportRunner.new(import_config) : ImportRunner.new(import_config)
+  runner = ImportRunnerFactory.build import_config
   detector.add_listener ImportTrigger.new(import_config.data.merge import_runner: runner)
 end
 

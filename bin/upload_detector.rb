@@ -41,8 +41,7 @@ end
 
 unless opts[:no_import]
   import_config = AppConfig.new filename: 'import_trigger.yml', env: env
-  runner = ImportRunnerFactory.build import_config
-  detector.add_listener ImportTrigger.new(import_config.data.merge import_runner: runner)
+  detector.add_listener ImportTrigger.new(import_config)
 end
 
 UploadDetector.new( logger: nil, daemonized: config.daemonize ).run( detector )

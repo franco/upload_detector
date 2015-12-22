@@ -1,16 +1,9 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 
-if ENV['DEPLOY'] == 'production'
-  set :user, "manager_staging"
-  set :user, "import"
-  role :app, "kai.shortcutmedia.com"
-else
-  puts "*** No default deploy target!"
-  #set :port, 2222
-  #role :app, "localhost"
-  exit
-end
+set :user, "manager_staging"
+set :user, "import"
+role :app, "kai.shortcutmedia.com"
 
 set :application, "upload_detector"
 

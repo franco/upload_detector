@@ -17,8 +17,7 @@ set :use_sudo, false
 
 set :scm, :git
 set :repository, "git@github.com:shortcutmedia/upload_detector.git"
-#set :branch, "master"
-set :branch, "using_tonga"
+set :branch, "master"
 
 # install and use rvm
 set :rvm_ruby_string, 'ruby-1.9.3-p327'

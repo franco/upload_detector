@@ -1,17 +1,9 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 
-if ENV['DEPLOY'] == 'production'
-  set :branch, "master"
-  set :user, "manager_staging"
-  set :user, "import"
-  role :app, "kai.shortcutmedia.com"
-else
-  puts "*** No default deploy target!"
-  #set :port, 2222
-  #role :app, "localhost"
-  exit
-end
+set :user, "manager_staging"
+set :user, "import"
+role :app, "kai.shortcutmedia.com"
 
 set :application, "upload_detector"
 
@@ -25,8 +17,8 @@ set :use_sudo, false
 
 set :scm, :git
 set :repository, "git@github.com:shortcutmedia/upload_detector.git"
-set :branch, "master"
-
+#set :branch, "master"
+set :branch, "using_tonga"
 
 # install and use rvm
 set :rvm_ruby_string, 'ruby-1.9.3-p327'

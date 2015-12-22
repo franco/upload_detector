@@ -24,6 +24,10 @@ class Import
     upload_reference
   end
 
+  def account
+    UploadReference.account_from_id id
+  end
+
   def ==(other)
     self.upload_reference == other.upload_reference &&
       self.files == other.files &&

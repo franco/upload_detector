@@ -19,6 +19,11 @@ class AppConfig
     data[key.to_s]
   end
 
+  def merge! hash
+    data.merge! hash.stringify_keys
+    define_methods_for_environment(data.keys)
+  end
+
   private
 
   def load_data filename, env=@env
@@ -28,11 +33,13 @@ class AppConfig
 
   def define_methods_for_environment names
     names.each do |name|
-      self.class.class_eval <<-EOS
-        def #{name}
-          data['#{name}']
-        end
-      EOS
+      unless respond_to? name
+        self.singleton_class.class_eval <<-EOS
+          def #{name}
+            data['#{name}']
+          end
+        EOS
+      end
     end
   end
 end

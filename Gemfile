@@ -1,16 +1,13 @@
 # A sample Gemfile
-source "http://rubygems.org"
-
-gem 'celluloid'
+source "https://rubygems.org"
 gem 'daemons'
-
 gem 'log4r'
 
-gem 'active_support', :require => 'active_support/core_ext/string/inflections'
+gem 'activesupport', "3.0.0", :require => false
 
 gem 'rake'
 
-gem 'debugger'
+#gem 'debugger'
 
 group :development do
   gem 'rvm-capistrano'

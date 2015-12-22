@@ -33,7 +33,7 @@ class ImportRunner
     self.state  = :run
     self.result = nil
     Timeout::timeout timeout, TimeoutError do
-      self.result = shell.execute "#{run_script}", import.files
+      self.result = execute_script import
     end
 
     if result.success?
@@ -57,6 +57,12 @@ class ImportRunner
     # we don't know for sure as the import doesn't return enough
     # information yet. We just get success or not.
   end
+
+  protected
+
+    def execute_script import
+      shell.execute "#{run_script}", import.files
+    end
 
 end
 

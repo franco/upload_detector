@@ -21,3 +21,12 @@ production:
   pidfile: "/tmp"
   input_file: "/var/log/sftp.log"
   #input_file: "tmp/sftp.log"
+
+tonga:
+  <<: *defaults
+  daemonize: true
+  logfile: "log/tonga_upload_detector.log"
+  pidfile: "/srv/import/upload_detector/tmp"
+  input_file: "/var/log/sftp.log"
+
+

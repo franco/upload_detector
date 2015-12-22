@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This script goes through all sftp accounts and re-links dev/log
 # to the log socket under /srv/sftp/dev/log.

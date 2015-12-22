@@ -16,9 +16,9 @@ TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/srv/import/upload_detector/current
 SFTP_ROOT=/srv/sftp
 PID=/srv/import/upload_detector/tmp/upload_detector.pid
-CMD="cd $APP_ROOT; UPLOAD_DETECTOR_ENV=tonga bin/upload_detector.rb"
+CMD="cd $APP_ROOT; UPLOAD_DETECTOR_ENV=tonga nohup bin/upload_detector.rb &"
 AS_USER=import
-SANITIZE_HARDLINKS_CMD=$APP_ROOT/bin/sftp_hardlink_to_socket.sh $SFTP_ROOT
+SANITIZE_HARDLINKS_CMD="$APP_ROOT/bin/sftp_hardlink_to_socket.sh $SFTP_ROOT"
 set -u
 
 sig () {
@@ -37,7 +37,8 @@ case "$1" in
 start)
   sig 0 && echo >&2 "Already running" && exit 0
   $SANITIZE_HARDLINKS_CMD
-  run $CMD
+  echo "Starting upload_detector"
+  run "$CMD"
   ;;
 stop)
   sig QUIT && exit 0
@@ -49,7 +50,7 @@ force-stop)
   ;;
 restart)
   stop
-  run $CMD
+  run "$CMD"
   ;;
 *)
   echo >&2 "Usage: $0 <start|stop|restart>"
